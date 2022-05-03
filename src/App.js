@@ -1,24 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import { ForceGraph } from "./components/forceGraph";
+import Navbar from "./components/Navbar";
+import "./App.css";
+import { convertLength } from "@mui/material/styles/cssUtils";
 
 function App() {
+  const nodeHoverTooltip = React.useCallback((node) => {
+    return `<div>     
+      <b>${node.name}</b>
+    </div>`;
+  }, []);
+
+  const [datas, setData] = useState([{}]);
+
+  useEffect(() => {
+    fetch("/grafo")
+      .then((res) => res.json())
+      .then(datas => {
+        setData(datas);
+        console.log(datas);
+      });
+  }, [])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navbar></Navbar>
+      <div>
+        {(typeof datas.grafo === 'undefined')?(
+          <p>Loading . . .</p>
+        ): (
+          datas.grafo.map((hola,i)=> (
+            <p key={i}>{hola}</p>
+          ))
+        )}
+      </div>
+      <section className="Main">
+        {/*<ForceGraph linksData={data.links} nodesData={data.nodes} nodeHoverTooltip={nodeHoverTooltip} />*/}
+      </section>
     </div>
   );
 }
