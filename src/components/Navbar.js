@@ -9,8 +9,11 @@ import Menu from "@mui/material/Menu";
 import Container from "@mui/material/Container";
 
 import MenuItem from "@mui/material/MenuItem";
+import { NuevoGrafo } from "./NuevoGrafo";
 
 const Navbar = () => {
+  /* Cuadro nuevo grafo aleatorio */
+  const [anchorGraAl, setAnchorGraAl] = React.useState(null);
   /* Opcion Menu editar */
   const [anchorElEd, setAnchorEd] = React.useState(null);
   /* Opcion Menu Archivo */
@@ -19,8 +22,8 @@ const Navbar = () => {
   const [anchorHer, setAnchorHer] = React.useState(null);
   /* Opcion Menu aplicacion */
   const [anchorApp, setAnchorApp] = React.useState(null);
-    /* Opcion Menu Ayuda */
-    const [anchorAy, setAnchorAy] = React.useState(null);
+  /* Opcion Menu Ayuda */
+  const [anchorAy, setAnchorAy] = React.useState(null);
   /* Opcion Menu ventana */
   const [anchorVen, setAnchorVen] = React.useState(null);
   /* Opcion Menu Analizar */
@@ -36,11 +39,26 @@ const Navbar = () => {
 
   /* Opcion aleatorio */
   const crearAleatorio = () => {
-    
+    {
+      console.log("sisas");
+    }
+
+    <div>
+      <input type="text" placeholder="nodes" autoFocus />
+    </div>;
   };
   const abrirArchivo = () => {
-    
-    return 'hola'
+    return "hola";
+  };
+  /* Abri el cuadro grafo aleatorio*/
+  const handleOpenGraAl = (event) => {
+    setAnchorGraAl(event.currentTarget);
+  };
+
+  /* Cerrar el cuadro grafo aleatorio*/
+
+  const handleCloseGraAl = () => {
+    setAnchorGraAl(null);
   };
   /* Abri el menu archivo */
   const handleOpenNavMenu = (event) => {
@@ -238,9 +256,36 @@ const Navbar = () => {
               }}
             >
               {/*Items menu nuevo grafo */}
-              <MenuItem onClick={crearAleatorio}>Aleatorio</MenuItem>
+              <MenuItem onClick={handleOpenGraAl}>Aleatorio</MenuItem>
               <MenuItem onClick={crearAleatorio}>Personalizado</MenuItem>
             </Menu>
+            <Box
+            id="boxAl"
+              anchorEl={anchorGraAl}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "right",
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "left",
+              }}
+              open={Boolean(anchorGraAl)}
+              onClose={handleCloseGraAl}
+              sx={{
+                display: { xs: "block", md: "block" },
+              }}
+            >
+              
+                <input
+                  type="text"
+                  
+                  placeholder="nodes"
+                  autoFocus
+                />
+              
+            </Box>
           </Box>
           {/* Boton editar */}
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "flex" } }}>
@@ -452,11 +497,9 @@ const Navbar = () => {
                 display: { xs: "block", md: "block" },
               }}
             >
-
               <MenuItem onClick={handleCloseVen}>Grafica</MenuItem>
               <MenuItem onClick={handleCloseVen}>Tabla</MenuItem>
             </Menu>
-            
           </Box>
           {/* Boton ayuda */}
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "flex" } }}>
@@ -487,11 +530,9 @@ const Navbar = () => {
                 display: { xs: "block", md: "block" },
               }}
             >
-
               <MenuItem onClick={handleCloseAy}>Ayuda</MenuItem>
               <MenuItem onClick={handleCloseAy}>Acerca Grafos</MenuItem>
             </Menu>
-            
           </Box>
         </Toolbar>
       </Container>
