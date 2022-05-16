@@ -5,8 +5,7 @@ import styles from "./forceGraph.module.css";
 export function runForceGraph(
   container,
   linksData,
-  nodesData,
-  nodeHoverTooltip
+  nodesData
 ) {
   const links = linksData.map((d) => Object.assign({}, d));
   const nodes = nodesData.map((d) => Object.assign({}, d));
@@ -118,7 +117,7 @@ export function runForceGraph(
     .attr("text-anchor", "middle")
     .attr("dominant-baseline", "central")
     .text((d) => {
-      return d.name;
+      return d.id;
     }) //label nodo
     .call(drag(simulation));
 
@@ -157,7 +156,7 @@ export function runForceGraph(
     .style("text-anchor", "middle")
     .style("pointer-events", "none")
     .attr("startOffset", "50%")
-    .text("hoña"//d => d.type
+    .text(d => d.weight
 
     );
 

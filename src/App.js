@@ -1,29 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Component } from "react";
 import { ForceGraph } from "./components/forceGraph";
 import Navbar from "./components/Navbar";
 import "./App.css";
 import data from "./data/data.json";
-import { convertLength } from "@mui/material/styles/cssUtils";
-import { NuevoGrafo } from "./components/NuevoGrafo";
-
-function App() {
-  const nodeHoverTooltip = React.useCallback((node) => {
-    return `<div>     
-      <b>${node.name}</b>
-    </div>`;
-  }, []);
 
 
+export default class App extends Component {
+  
+
+ 
+  render(){
   return (
     <div className="App">
       <Navbar></Navbar>
-      <NuevoGrafo></NuevoGrafo>
       
-      <section className="Main">
-       <ForceGraph linksData={data.links} nodesData={data.nodes} nodeHoverTooltip={nodeHoverTooltip} />
-      </section>
+       <ForceGraph linksData={data.links} nodesData={data.nodes} />
+      
     </div>
   );
+  }
 }
 
-export default App;
+

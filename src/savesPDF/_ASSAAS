@@ -1,0 +1,11 @@
+strict digraph  {
+1;
+2;
+3;
+4;
+5;
+2 -> 1  [weight=6];
+3 -> 5  [weight=4];
+4 -> 5  [weight=9];
+5 -> 2  [weight=0];
+}
