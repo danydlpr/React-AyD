@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -11,8 +11,9 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Container from "@mui/material/Container";
-import { Button, Link } from "@mui/material";
+import { Button } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
+import PDF from "../data/Manual_de_Usuario.pdf";
 
 const Navbar = () => {
   const [nodes, setNodes] = useState("");
@@ -27,7 +28,6 @@ const Navbar = () => {
   const [nuevoOrigenArco, setNuevoOrigenArco] = useState("");
   const [nuevoFinArco, setNuevoFinArco] = useState("");
   const [pesoArco, setPesoArco] = useState("");
-  const inputRef = useRef();
 
   /*Editar arco*/
   const [anchorEditarArco, setAnchorEditarArco] = React.useState(false);
@@ -93,7 +93,8 @@ const Navbar = () => {
         nodes: nodes,
         arcos: arcos,
       }),
-    });
+    }).then((response) => response.text())
+    .then((data) => window.alert(data));
     setAnchorGraAl(false);
   }
 
@@ -108,7 +109,8 @@ const Navbar = () => {
       body: JSON.stringify({
         name: node1,
       }),
-    });
+    }).then((response) => response.text())
+    .then((data) => window.alert(data));
     setAnchorGraPer(false);
   }
 
@@ -117,7 +119,8 @@ const Navbar = () => {
       headers: {
         "Content-Type": "application/json",
       },
-    });
+    }).then((response) => response.text())
+    .then((data) => window.alert(data));
   }
 
   function guardarGrafo() {
@@ -126,7 +129,8 @@ const Navbar = () => {
       headers: {
         "Content-Type": "application/json",
       },
-    });
+    }).then((response) => response.text())
+    .then((data) => window.alert(data));
   }
 
   function guardarComo(e) {
@@ -140,7 +144,8 @@ const Navbar = () => {
       body: JSON.stringify({
         name: nameGrafo,
       }),
-    });
+    }).then((response) => response.text())
+    .then((data) => window.alert(data));
     setAnchorGuardarComo(false);
   }
 
@@ -155,7 +160,8 @@ const Navbar = () => {
       body: JSON.stringify({
         name: nameGrafo,
       }),
-    });
+    }).then((response) => response.text())
+    .then((data) => window.alert(data));
     setAnchorExportarComoExcel(false);
   }
 
@@ -170,7 +176,7 @@ const Navbar = () => {
       body: JSON.stringify({
         name: nameGrafo,
       }),
-    });
+    })
     setAnchorExportarComoPDF(false);
   }
 
@@ -185,7 +191,7 @@ const Navbar = () => {
       body: JSON.stringify({
         name: nameGrafo,
       }),
-    });
+    })
     setAnchorExportarComoPNG(false);
   }
   function crearNodo(e) {
@@ -199,9 +205,11 @@ const Navbar = () => {
       body: JSON.stringify({
         name: nameNodo,
       }),
-    });
+    }).then((response) => response.text())
+    .then((data) => window.alert(data));
     setAnchorCrearNodo(false);
   }
+
   function eliminarNodo(e) {
     e.preventDefault();
 
@@ -213,7 +221,8 @@ const Navbar = () => {
       body: JSON.stringify({
         name: nameNodo,
       }),
-    });
+    }).then((response) => response.text())
+    .then((data) => window.alert(data));
     setAnchorEliminarNodo(false);
   }
 
@@ -229,7 +238,8 @@ const Navbar = () => {
         label: nameNodo,
         nuevo: nameNodoNuevo,
       }),
-    });
+    }).then((response) => response.text())
+    .then((data) => window.alert(data));
     setAnchorEditarNodo(false);
   }
 
@@ -246,7 +256,8 @@ const Navbar = () => {
         fin: finArco,
         weight: pesoArco,
       }),
-    });
+    }).then((response) => response.text())
+    .then((data) => window.alert(data));
     setAnchorCrearArco(false);
   }
 
@@ -262,7 +273,8 @@ const Navbar = () => {
         inicio: origenArco,
         fin: finArco,
       }),
-    });
+    }).then((response) => response.text())
+    .then((data) => window.alert(data));
     setAnchorEliminarArco(false);
   }
 
@@ -281,7 +293,8 @@ const Navbar = () => {
         nuevoFin: nuevoFinArco,
         weight: pesoArco,
       }),
-    });
+    }).then((response) => response.text())
+    .then((data) => window.alert(data));
     setAnchorEditarArco(false);
   }
   function abrirArchivo(e) {
@@ -295,9 +308,26 @@ const Navbar = () => {
       body: JSON.stringify({
         archivo: archivo,
       }),
-    });
+    }).then((response) => response.text())
+    .then((data) => window.alert(data));
     setAnchorAbrir(false);
   }
+
+  function mostrarMatrix(){
+    fetch("http://127.0.0.1:5000/matrix", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((response) => response.text())
+    .then((data) => window.alert(data));
+    setAnchorVen(false);
+  }
+
+  function abrirPDF(){
+    window.open(PDF)
+  }
+  
 
   /* EditarArco*/
   const handleOpenEditarArco = (event) => {
@@ -391,20 +421,13 @@ const Navbar = () => {
     setAnchorAbrir(false);
   };
 
-  /* Opcion aleatorio */
-  const crearAleatorio = () => {};
-
   /* Abrir el cuadro grafo aleatorio*/
   const handleOpenGraAl = (event) => {
     setAnchorGraAl(true);
   };
 
   /* Cerrar el cuadro grafo aleatorio*/
-  //Aceptar
-  const handleCloseGraAlA = () => {
-    crearGrafo();
-    setAnchorGraAl(false);
-  };
+
   //Cancelar
   const handleCloseGraAlC = () => {
     setAnchorGraAl(false);
@@ -415,11 +438,6 @@ const Navbar = () => {
     setAnchorGraPer(true);
   };
   /* Cerrar el cuadro grafo personalizado*/
-  //Aceptar
-  const handleCloseGraPerA = () => {
-    crearPerso();
-    setAnchorGraPer(false);
-  };
   //Cancelar
   const handleCloseGraPerC = () => {
     setAnchorGraPer(false);
@@ -1169,8 +1187,8 @@ const Navbar = () => {
                 display: { xs: "block", md: "block" },
               }}
             >
-              <MenuItem onClick={handleCloseVen}>Grafica</MenuItem>
-              <MenuItem onClick={handleCloseVen}>Tabla</MenuItem>
+              
+              <MenuItem onClick={mostrarMatrix}>Tabla</MenuItem>
             </Menu>
           </Box>
           {/* Boton ayuda */}
@@ -1202,7 +1220,7 @@ const Navbar = () => {
                 display: { xs: "block", md: "block" },
               }}
             >
-              <MenuItem onClick={handleCloseAy}>Ayuda</MenuItem>
+              <MenuItem onClick={abrirPDF}>Ayuda</MenuItem>
               <MenuItem > <a href="https://www.grapheverywhere.com/que-son-los-grafos/"><Button>Acerca Grafos</Button></a></MenuItem>
             </Menu>
           </Box>

@@ -1,5 +1,5 @@
 {
-    "directed": true,
+    "directed": false,
     "multigraph": false,
     "graph": {},
     "nodes": [
@@ -8,13 +8,27 @@
         },
         {
             "id": 2
+        },
+        {
+            "id": 3
+        },
+        {
+            "id": 4
+        },
+        {
+            "id": 5
         }
     ],
     "links": [
         {
-            "weight": 6,
-            "source": 2,
-            "target": 1
+            "weight": 4,
+            "source": 1,
+            "target": 2
+        },
+        {
+            "weight": 1,
+            "source": 4,
+            "target": 5
         }
     ]
 }
