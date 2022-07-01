@@ -327,6 +327,17 @@ const Navbar = () => {
   function abrirPDF(){
     window.open(PDF)
   }
+
+  function queyranne(){
+    fetch("http://127.0.0.1:5000/que", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((response) => response.text())
+    .then((data) => window.alert(data));
+    setanchorAn(false);
+  }
   
 
   /* EditarArco*/
@@ -1087,7 +1098,7 @@ const Navbar = () => {
                 display: { xs: "block", md: "block" },
               }}
             >
-              <MenuItem onClick={handleCloseElAn}>Algoritmo1</MenuItem>
+              <MenuItem onClick={queyranne}>Queyranne</MenuItem>
               <MenuItem onClick={handleCloseElAn}>Algoritmo2</MenuItem>
               <MenuItem onClick={handleCloseElAn}>Algoritmo3</MenuItem>
             </Menu>
